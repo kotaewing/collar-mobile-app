@@ -1,7 +1,10 @@
 import * as AuthSession from 'expo-auth-session';
 import jwtDecode from 'jwt-decode';
 import * as React from 'react';
-import { Alert, Button, Platform, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, Platform, StyleSheet, Text, View, ImageBackground } from 'react-native';
+import MyDay from './components/MyDay';
+import NavBar from './components/NavBar';
+var backgroundImage = require('./assets/images/collar-background.png')
 
 // You need to swap out the Auth0 client id and domain with the one from your Auth0 client.
 // In your Auth0 client, you need to also add a url to your authorized redirect urls.
@@ -61,33 +64,39 @@ export default function App() {
   }, [result]);
 
   return (
-    <View style={styles.container}>
-      {name ? (
-        <>
-          <Text style={styles.title}>You are logged in, {name}!</Text>
-          <Button title="Log out" onPress={() => setName(null)} />
-        </>
-      ) : (
-        <Button
-          disabled={!request}
-          title="Log in with Auth0"
-          onPress={() => promptAsync({ useProxy })}
-        />
-      )}
+    // <View style={styles.container}>
+    //   {name ? (
+    //     <>
+    //       <Text style={styles.title}>You are logged in, {name}!</Text>
+    //       <Button title="Log out" onPress={() => setName(null)} />
+    //     </>
+    //   ) : (
+    //     <Button
+    //       disabled={!request}
+    //       title="Log in with Auth0"
+    //       onPress={() => promptAsync({ useProxy })}
+    //     />
+    //   )}
+    // </View>
+    <View>
+      <ImageBackground style={styles.backgroundImage} source={backgroundImage} resizeMode="cover">
+        <MyDay />
+        <View style={styles.navBarContainer}>
+          <NavBar style={styles.navBar} />
+        </View>
+      </ ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  navBarContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
+    position: 'relative',
+    marginTop: 50
   },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    marginTop: 40,
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
   },
 });
