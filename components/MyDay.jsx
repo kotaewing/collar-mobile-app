@@ -6,7 +6,7 @@ import Card from './Card'
 export default function MyDay() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>My Day</Text>
+            <Text style={styles.title}>My Day(test)</Text>
             <View style={styles.cardContainer}>
                 <Card />
                 <Card />
